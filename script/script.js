@@ -1,33 +1,50 @@
-let computer;
 let computerScore = 0;
-let human = prompt("Rock = 1, Paper = 2, Scissors = 3!!");
 let humanScore = 0;
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
-getComputerChoice();
-console.log(getHumanChoice(human));
+console.log(computerSelection);
+console.log(humanSelection);
+playRound(humanSelection, computerSelection);
 
 function getComputerChoice() {
-    let computerChoice; 
-    computer = Math.floor(Math.random() * 3) + 1;
-
+    let computer = Math.floor(Math.random() * 3) + 1;
     if(computer == 1){
-        return computerChoice = ("Rock");
+        return computer = ("Rock");
     } else if(computer == 2){
-        return computerChoice = ("Paper");
+        return computer = ("Paper");
     } else {
-        return computerChoice = ("Scissors");
+        return computer = ("Scissors");
     }
 }
 
 function getHumanChoice() {
-    let humanChoice;
+    let human = prompt("Rock = 1, Paper = 2, Scissors = 3!!");
     if(human.toLowerCase() == ("rock")){
-        return humanChoice = ("Rock");
+        return human = ("Rock");
     } else if (human.toLowerCase() == ("paper")){
-        return humanChoice = ("Paper");
+        return human = ("Paper");
     } else if (human.toLowerCase() == ("scissors")){
-        return humanChoice = ("Scissors");
+        return human = ("Scissors");
     } else {
         console.log("Please refresh and enter a rock, paper or scissors!");
+    }
+}
+
+function playRound(humanChoice, computerChoice) {
+    if(humanChoice == ("Rock") && computerChoice == ("Scissors")){
+        humanScore ++;
+        console.log("You won!")
+    } else if (humanChoice == ("Scissors") && computerChoice == ("Paper")){
+        humanScore ++;
+        console.log("You won!")
+    } else if (humanChoice == ("Paper") && computerChoice == ("Rock")){
+        humanScore ++;
+        console.log("You won!")
+    } else if (humanChoice == computerChoice){
+        console.log("It's a tie!");
+    } else {
+        computerScore ++;
+        console.log("You lost!");
     }
 }
