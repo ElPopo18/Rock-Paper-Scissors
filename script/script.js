@@ -1,5 +1,7 @@
 let computer;
-let human = parseInt(prompt("Rock = 1, Paper = 2, Scissors = 3!!"));
+let computerScore = 0;
+let human = prompt("Rock = 1, Paper = 2, Scissors = 3!!");
+let humanScore = 0;
 
 getComputerChoice();
 console.log(getHumanChoice(human));
@@ -19,13 +21,13 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let humanChoice;
-    if(human == 1){
+    if(human.toLowerCase() == ("rock")){
         return humanChoice = ("Rock");
-    } else if (human == 2){
+    } else if (human.toLowerCase() == ("paper")){
         return humanChoice = ("Paper");
-    } else if (human == 3){
+    } else if (human.toLowerCase() == ("scissors")){
         return humanChoice = ("Scissors");
     } else {
-        console.log("Please refresh and enter a valid number!");
+        console.log("Please refresh and enter a rock, paper or scissors!");
     }
 }
