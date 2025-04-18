@@ -23,7 +23,9 @@ function getHumanChoice() {
         return humanChoice = ("Rock");
     } else if (human == 2){
         return humanChoice = ("Paper");
-    } else {
+    } else if (human == 3){
         return humanChoice = ("Scissors");
+    } else {
+        console.log("Please refresh and enter a valid number!");
     }
 }
