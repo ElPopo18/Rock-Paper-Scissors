@@ -3,22 +3,28 @@ playGame();
 function getComputerChoice() {
     let computer = Math.floor(Math.random() * 3) + 1;
     if(computer == 1){
-        return computer = ("The computer choose: Rock!");
+        console.log("The computer choose: Rock!");
+        return computer = ("Rock");
     } else if(computer == 2){
-        return computer = ("The computer choose: Paper!");
+        console.log("The computer choose: Paper!")
+        return computer = ("Paper");
     } else {
-        return computer = ("The computer choose: Scissors!");
+        console.log("The computer choose: Scissors!")
+        return computer = ("Scissors");
     }
 }
 
 function getHumanChoice() {
     let human = prompt("Rock = 1, Paper = 2, Scissors = 3!!");
     if(human.toLowerCase() == ("rock")){
-        return human = ("You choose: Rock!");
+        console.log("You choose: Rock!");
+        return human = ("Rock");
     } else if (human.toLowerCase() == ("paper")){
-        return human = ("You choose: Paper!");
+        console.log("You choose: Paper!");
+        return human = ("Paper");
     } else if (human.toLowerCase() == ("scissors")){
-        return human = ("You choose: Scissors!");
+        console.log("You choose: Scissors!");
+        return human = ("Scissors");
     } else {
         console.log("Please refresh and enter a rock, paper or scissors!");
     }
@@ -32,9 +38,6 @@ function playGame(){
     for(let i = 0; i < rounds; i++){
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
-
-        console.log(computerSelection);
-        console.log(humanSelection);
 
         let score = playRound(humanSelection, computerSelection, humanScore, computerScore);
 
@@ -59,13 +62,13 @@ function playGame(){
 }
 
 function playRound(humanChoice, computerChoice) {
-    if(humanChoice == ("You choose: Rock!") && computerChoice == ("The computer choose: Scissors!")){
+    if(humanChoice == ("Rock") && computerChoice == ("Scissors")){
         console.log("You won!");
         return 'human';
-    } else if (humanChoice == ("You choose: Scissors!") && computerChoice == ("The computer choose: Paper!")){
+    } else if (humanChoice == ("Scissors") && computerChoice == ("Paper")){
         console.log("You won!")
         return 'human';
-    } else if (humanChoice == ("You choose: Paper!") && computerChoice == ("The computer choose: Scissors!")){
+    } else if (humanChoice == ("Paper") && computerChoice == ("Rock")){
         console.log("You won!")
         return 'human';
     } else if (humanChoice == computerChoice){
