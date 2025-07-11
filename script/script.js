@@ -1,81 +1,128 @@
-playGame();
+document.addEventListener('DOMContentLoaded', function () {
+    function getComputerChoices() {
 
-function getComputerChoice() {
-    let computer = Math.floor(Math.random() * 3) + 1;
-    if(computer == 1){
-        console.log("The computer choose: Rock!");
-        return computer = ("Rock");
-    } else if(computer == 2){
-        console.log("The computer choose: Paper!")
-        return computer = ("Paper");
-    } else {
-        console.log("The computer choose: Scissors!")
-        return computer = ("Scissors");
+        let computer = Math.floor(Math.random() * 3) + 1;
+        if(computer == 1){
+            computer = ("Rock");
+            return computer;
+        } else if(computer == 2){
+            computer = ("Paper");
+            return computer;
+        } else {
+            computer = ("Scissors");
+            return computer;
+        }
+        
     }
-}
 
-function getHumanChoice() {
-    let human = prompt("Rock = 1, Paper = 2, Scissors = 3!!");
-    if(human.toLowerCase() == ("rock")){
-        console.log("You choose: Rock!");
-        return human = ("Rock");
-    } else if (human.toLowerCase() == ("paper")){
-        console.log("You choose: Paper!");
-        return human = ("Paper");
-    } else if (human.toLowerCase() == ("scissors")){
-        console.log("You choose: Scissors!");
-        return human = ("Scissors");
-    } else {
-        console.log("Please refresh and enter a rock, paper or scissors!");
-    }
-}
+    function playRound(humanChoice) {
 
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-    const rounds = 5;
+        let div = document.querySelector(".roundResults");
 
-    for(let i = 0; i < rounds; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+        rounds++;
 
-        let score = playRound(humanSelection, computerSelection, humanScore, computerScore);
+        if(rounds > 1){
+            while (div.firstChild) {
+                div.removeChild(div.firstChild);
+            }
+        }
 
-        if(score == 'human'){
-            ++humanScore;
-        }else if(score == 'computer'){
-            ++computerScore;
+        let computerChoice = getComputerChoices();
+
+        let humanResult = document.createElement("p");
+        let computerResult = document.createElement("p");
+        let winner = document.createElement("p");
+
+        humanResult.textContent = `You choose: ${humanChoice}`;
+        computerResult.textContent = `The computer choose: ${computerChoice}`;
+
+        div.appendChild(humanResult);
+        div.appendChild(computerResult);
+        div.appendChild(winner);
+
+        if(humanChoice == ("Rock") && computerChoice == ("Scissors")){
+            winner.textContent = "You won!";
+            result = 'human';
+            scores(result);
+        } else if (humanChoice == ("Scissors") && computerChoice == ("Paper")){
+            winner.textContent = "You won!";
+            result = 'human';
+            scores(result);
+        } else if (humanChoice == ("Paper") && computerChoice == ("Rock")){
+            winner.textContent = "You won!";
+            result = 'human';
+            scores(result);
+        } else if (humanChoice == computerChoice){
+            winner.textContent = "It's a tie!";
+            result = 'tie';
+            scores(result);
+        } else {
+            winner.textContent = "You lost!";
+            result = 'computer';
+            scores(result);
         }
     }
 
-    console.log(`Your score is: ${humanScore}`);
-    console.log(`The computer's score is: ${computerScore}`);
+    function scores(result){
 
-    if(humanScore > computerScore){
-        console.log("You won the game! Youre the Rock, Paper, Scissors champion!!! :D")
-    }else if(humanScore < computerScore){
-        console.log("You lost the game… The computer won :(")
-    }else{
-        console.log("The game ended in a tie!!! :o")
+        let resultScreen = document.querySelector(".resultScreen")
+
+        if(rounds > 1){
+            while (resultScreen.firstChild) {
+                resultScreen.removeChild(resultScreen.firstChild);
+            }
+        }
+        
+        let winnerScreen = document.createElement("p");
+        let textHuman = document.createElement("p");
+        let textComputer = document.createElement("p");
+
+        if(result == 'human'){
+            ++humanScore;
+        }else if(result == 'computer'){
+            ++computerScore;
+        }
+
+        textHuman.textContent = `Your score: ${humanScore}`;
+        textComputer.textContent = `The computer's score: ${computerScore}`;
+
+        resultScreen.appendChild(textHuman);
+        resultScreen.appendChild(textComputer);
+        resultScreen.appendChild(winnerScreen);
+
+        if(humanScore == 5 || computerScore == 5){
+            if(humanScore > computerScore){
+                winnerScreen.textContent = "You won the game! Youre the Rock, Paper, Scissors champion!!! :D"
+            }else{
+                winnerScreen.textContent = "You lost the game… The computer won :("
+            }
+            rock.disabled = true;
+            paper.disabled = true;
+            scissors.disabled = true;
+        }
     }
 
-}
+    let rounds = 0;
+    let humanScore = 0;
+    let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-    if(humanChoice == ("Rock") && computerChoice == ("Scissors")){
-        console.log("You won!");
-        return 'human';
-    } else if (humanChoice == ("Scissors") && computerChoice == ("Paper")){
-        console.log("You won!")
-        return 'human';
-    } else if (humanChoice == ("Paper") && computerChoice == ("Rock")){
-        console.log("You won!")
-        return 'human';
-    } else if (humanChoice == computerChoice){
-        console.log("It's a tie!");
-        return 'tie';
-    } else {
-        console.log("You lost!");
-        return 'computer';
-    }
-}
+    let rock = document.querySelector(".rock")
+    rock.addEventListener('click', (e) => {
+        human = ("Rock");
+        playRound(human);
+    })
+
+    let paper = document.querySelector(".paper")
+    paper.addEventListener('click', (e) => {
+        human = ("Paper");
+        playRound(human);
+    })
+
+    let scissors = document.querySelector(".scissors")
+    scissors.addEventListener('click', (e) => {
+        human = ("Scissors");
+        playRound(human);
+    })
+            
+
+})
